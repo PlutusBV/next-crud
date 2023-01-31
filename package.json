@@ -14,7 +14,8 @@
     "lint": "eslint",
     "prepublishOnly": "yarn lint && yarn build",
     "test": "jest -i",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "prepare": "yarn run build"
   },
   "devDependencies": {
     "@jest-mock/express": "^1.4.4",

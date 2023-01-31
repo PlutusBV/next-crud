@@ -71,6 +71,9 @@ class PrismaJsonSchemaParser {
       }))
 
       methods.forEach(({ name: method, schemaName }) => {
+        // For now ignore methods without fields
+        // TODO: see if we can improve this flow and generate better models
+        if (!this.dmmf.mutationType.fieldMap[method]) return
         const dataFields =
           // @ts-ignore
           this.dmmf.mutationType.fieldMap[method].args[0].inputTypes[0].type

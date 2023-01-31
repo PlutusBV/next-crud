@@ -220,6 +220,7 @@ const generateSwaggerPathObject = <M extends string>({
       const method = generateMethodForRouteType(routeType)
       methods[method] = {
         tags: [tag],
+        operationId: `${modelName}${routeType}`.replaceAll('_', ''),
         summary: modelsConfig?.[modelName]?.routeTypes?.[routeType]?.summary,
         parameters: getQueryParams(routeType).map((queryParam) => {
           return { ...queryParam, in: 'query' }
