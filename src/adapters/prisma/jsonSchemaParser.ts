@@ -56,6 +56,18 @@ class PrismaJsonSchemaParser {
             properties[property].type = properties[property].type[0]
           }
           properties[property].nullable = true
+        } else if (properties[property].anyOf) {
+          const isNullable = properties[property].anyOf.some(
+            (propType) => propType.type && propType.type === 'null'
+          )
+
+          if (isNullable) {
+            const filteredAnyof = properties[property].anyOf.filter(
+              (propType) => !(propType.type && propType.type === 'null')
+            )
+            properties[property].anyOf = filteredAnyof
+            properties[property].nullable = true
+          }
         }
       }
     }
